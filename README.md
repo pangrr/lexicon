@@ -7,3 +7,8 @@
 4. Update the students vocabulary by
     - descrease familiarity of the words the student looks up
     - increase familiarity of the rest of the words
+
+## first time measurement - predict vocabulary breath
+
+
+## update measurement - adjust measurement of individual words
