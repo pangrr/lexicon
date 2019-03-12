@@ -1,4 +1,4 @@
-# predict-vocabulary
+# measure-vocabulary
 
 ## help reading - a use case
 1. Given a student's vocabulary.
