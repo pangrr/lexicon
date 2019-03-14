@@ -55,7 +55,7 @@ function notLookedUp(wordsFamiliarity: WordsFamiliarity, ...words): WordsFamilia
 
 # how to show explaination
 ## inline hint
-![](https://github.com/pangrr/reading-assistant/blob/master/hint.png)
+![](../hint.png)
 ```html
 <html>
 <body>
