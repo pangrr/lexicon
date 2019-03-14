@@ -90,8 +90,5 @@ function notLookedUp(wordsFamiliarity: WordsFamiliarity, ...words): WordsFamilia
 
 
 # how to get explaination
-An API that to return simple explaination (hint below text). Another API to get full explaination (tooltip on selection).
-
-Google translate API is a good place to start.
-
-
+- An API that to return simple explaination (hint below text) (Google traslation?).
+- Another API to get full explaination (tooltip on selection) (Youdao?).
