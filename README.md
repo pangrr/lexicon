@@ -1,3 +1,8 @@
+- [how it works](#how-it-works)
+  * [words familiarity data structure](#words-familiarity-data-structure)
+  * [which words should show explaination](#which-words-should-show-explaination)
+  * [update words familiarity](#update-words-familiarity)
+
 # how it works
 1. Given a person's words familiarity.
 2. Show the person a text where words of low familiarity have explaination.
