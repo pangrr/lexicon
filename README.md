@@ -53,8 +53,7 @@ function notLookedUp(wordsFamiliarity: WordsFamiliarity, ...words): WordsFamilia
 ```
 
 
-# how to show explaination
-## inline hint
+# how to show inline hint
 ![](https://github.com/pangrr/reading-assistant/blob/master/hint.png)
 ```html
 <html>
@@ -88,6 +87,31 @@ function notLookedUp(wordsFamiliarity: WordsFamiliarity, ...words): WordsFamilia
 ```
 
 ## tooltip on selected text
+
+
+# how to show explaination for user selected text
+## how to get user selected text
+```html
+<html>
+<body>
+<p onmouseup="showSelectedText()">Call me Ishmael. Some years ago—never mind how long precisely—having little or no money in my purse, and nothing particular to interest me on shore, I thought I would sail about a little and see the watery part of the world. </p>
+</body>
+</html>
+<script>
+function getSelectedText() {
+  if (window.getSelection) {
+    return window.getSelection().toString();
+  } else if (document.selection && document.selection.type !== "Control") {
+    return document.selection.createRange().text;
+  }
+}
+
+function showSelectedText() {
+  console.log(getSelectedText());
+}
+</script>
+```
+## how to show explaination
 
 
 # how to get explaination
