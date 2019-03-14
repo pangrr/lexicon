@@ -8,7 +8,7 @@
 
 
 ## words familiarity data structure
-```
+```ts
 let wordsFamiliarity: WordsFamiliarity = {
    nausea: Familiarity.Alien,
    almond: Familiarity.Known
@@ -26,7 +26,7 @@ interface WordsFamiliarity {
 ```
 
 ## which words should show explaination
-```
+```ts
 function shouldShowExplaination(wordsFamiliarity: WordsFamiliarity, word: string): boolean {
     return isKnownWord(wordsFamiliarity, word);
 }
@@ -42,7 +42,7 @@ function isKnownWord(wordsFamiliarity: WordsFamiliarity, word: string): boolean 
 ```
 
 ## update words familiarity
-```
+```ts
 function lookedUp(wordsFamiliarity: WordsFamiliarity, ...words: string[]): WordsFamiliarity {
     return descreaseFamiliarity(wordsFamiliarity, words);
 }
