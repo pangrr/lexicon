@@ -8,7 +8,7 @@
 
 
 # words familiarity data structure
-```ts
+```ts code/words-familiarity-interface.ts
 let wordsFamiliarity: WordsFamiliarity = {
    nausea: Familiarity.Alien,
    almond: Familiarity.Known
@@ -26,7 +26,7 @@ interface WordsFamiliarity {
 ```
 
 # which words should show explaination
-```ts
+```ts code/words-familiarity-thresholds.ts
 function shouldShowExplaination(wordsFamiliarity: WordsFamiliarity, word: string): boolean {
     return isKnownWord(wordsFamiliarity, word);
 }
@@ -42,7 +42,7 @@ function isKnownWord(wordsFamiliarity: WordsFamiliarity, word: string): boolean 
 ```
 
 # how to update words familiarity
-```ts
+```ts code/update-words-familiarity.ts
 function lookedUp(wordsFamiliarity: WordsFamiliarity, ...words: string[]): WordsFamiliarity {
     return descreaseFamiliarity(wordsFamiliarity, words);
 }
@@ -55,7 +55,7 @@ function notLookedUp(wordsFamiliarity: WordsFamiliarity, ...words): WordsFamilia
 
 # how to show inline hint
 ![](https://github.com/pangrr/reading-assistant/blob/master/hint.png)
-```html
+```html code/demo-inlint-hint.html
 <html>
 <body>
   <div style="margin: auto; margin-top: 100px; width: 70%;">
@@ -91,7 +91,7 @@ function notLookedUp(wordsFamiliarity: WordsFamiliarity, ...words): WordsFamilia
 
 # how to show explaination for user selected text
 ## how to get user selected text
-```html
+```html code/demo-get-selected-text.html
 <html>
 <body>
 <p onmouseup="showSelectedText()">Call me Ishmael. Some years ago—never mind how long precisely—having little or no money in my purse, and nothing particular to interest me on shore, I thought I would sail about a little and see the watery part of the world. </p>
