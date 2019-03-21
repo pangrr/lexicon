@@ -10,9 +10,7 @@ enum Familiarity {
     known = 2;
 }
 ```
-- The lexicon can suggest which words in the given text should be translated in order to approximate the goal where the reader:
-        - doesn't have to look up unknown words which interrupts reading
-        - is not bothered by translation of known words
+- The lexicon can suggest which words in the given text should be translated in order to approximate the goal where the reader neither have to look up unknown words which interrupts reading nor is bothered by translation of known words.
 ```ts
 function shouldTranslateWord(word: string, lexicon: Lexicon): boolean {
     return lexicon[words] < Familiarity.known;
