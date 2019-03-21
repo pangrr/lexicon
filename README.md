@@ -10,7 +10,7 @@ enum Familiarity {
     known = 2;
 }
 ```
-- The lexicon can suggest which words in the given text should be translated in order to approximate the goal where the reader neither have to look up unknown words which interrupts reading nor is bothered by translation of known words. *Note* that for words not in the lexicon, there is a way to guess if the word should be translated. To simplify, we assume words not in the lexicon is unknown.
+- The lexicon can suggest which words in the given text should be translated in order to approximate the goal where the reader neither have to look up unknown words which interrupts reading nor is bothered by translation of known words. **Note** that for words not in the lexicon, there is a way to guess if the word should be translated. To simplify, we assume words not in the lexicon is unknown.
 ```ts
 function shouldTranslateWord(word: string, lexicon: Lexicon): boolean {
     if (lexicon[words] === undefined) return guessShouldTranslateWord(word, lexicon);
@@ -20,7 +20,7 @@ function guessShouldTranslateWord(word: string, lexicon: Lexicon): boolean {
     return false;
 }
 ```
-- The lexicon gets updated given which words the reader looks up and which words the reader doesn't. Words been looked up should be unknown while words not been looked up should get increased familiarity. *Note* that for words not in the lexicon, those been looked up should be marked as unknown in the lexicon, those not been looked up should be marked as known in the lexicon.
+- The lexicon gets updated given which words the reader looks up and which words the reader doesn't. Words been looked up should be unknown while words not been looked up should get increased familiarity. **Note** that for words not in the lexicon, those been looked up should be marked as unknown in the lexicon, those not been looked up should be marked as known in the lexicon.
 ```ts
 function lookedUp(word: string, lexicon: Lexicon): void {
     if (lexicon[word] === undefined) lexicon[word] = Familiarity.unknown;
