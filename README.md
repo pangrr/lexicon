@@ -10,13 +10,17 @@ enum Familiarity {
     known = 2;
 }
 ```
-- The lexicon can suggest which words in the given text should be translated in order to approximate the goal where the reader neither have to look up unknown words which interrupts reading nor is bothered by translation of known words.
+- The lexicon can suggest which words in the given text should be translated in order to approximate the goal where the reader neither have to look up unknown words which interrupts reading nor is bothered by translation of known words. *Note* that for words not in the lexicon, there is a way to guess if the word should be translated. To simplify, we assume words not in the lexicon is unknown.
 ```ts
 function shouldTranslateWord(word: string, lexicon: Lexicon): boolean {
-    return lexicon[words] < Familiarity.known;
+    if (lexicon[words] === undefined) return guessShouldTranslateWord(word, lexicon);
+    else return lexicon[words] < Familiarity.known;
+}
+function guessShouldTranslateWord(word: string, lexicon: Lexicon): boolean {
+    return false;
 }
 ```
-- The lexicon gets updated given which words the reader looks up and which words the reader doesn't. Words been looked up should be unknown while words not been looked up should get increased familiarity. Note that for words not in the lexicon, those been looked up should be marked as unknown in the lexicon, those not been looked up should be marked as known in the lexicon.
+- The lexicon gets updated given which words the reader looks up and which words the reader doesn't. Words been looked up should be unknown while words not been looked up should get increased familiarity. *Note* that for words not in the lexicon, those been looked up should be marked as unknown in the lexicon, those not been looked up should be marked as known in the lexicon.
 ```ts
 function lookedUp(word: string, lexicon: Lexicon): void {
     if (lexicon[word] === undefined) lexicon[word] = Familiarity.unknown;
@@ -28,9 +32,8 @@ function notLookedUp(word: string, lexicon: Lexicon): void {
 }
 ```
 
-
-
-# how to display hint for unfamiliar words
+# demo display hint for unfamiliar words and show translation on selected words
+## how to display hint for unfamiliar words
 ![](https://github.com/pangrr/reading-assistant/blob/master/hint.png)
 ```html demo.html #sampleParagraph
 <p #selectHook style="line-height: 2.3em">
@@ -60,9 +63,7 @@ Call me Ishmael. Some years ago—never mind how long precisely—having little 
 ```
 
 
-
-# how to display translation for user selected text
-## how to get user selected text
+## how to get selected text
 ```js demo.html #script
 function getSelectedText() {
   if (window.getSelection) {
@@ -78,12 +79,11 @@ onmouseup="doSomethingWithSelectedText()"
 ```
 
 
-# how to get translation
-- An API that to return simple explaination (hint below text) (Google traslation?).
-- Another API to get full explaination (tooltip on selection) (Youdao?).
+## how to get translation - google translation
 
 
-# biolerplate
+
+## biolerplate
 ```html demo.html
 <html>
 <head>
