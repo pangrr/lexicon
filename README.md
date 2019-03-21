@@ -1,36 +1,35 @@
-# how it works
-1. Given a person's words familiarity.
-2. Show the person a text where words of low familiarity have hint.
-3. Observe the person's behavior of looking up for words in the text.
-4. Update the person's words familiarity by
-    - descrease familiarity of the words the person looks up
-    - increase familiarity of the rest of the words
-
-
-# how to store a person's words familiarity
-Each word has a value of familiarity. Familiarity can be either `unfamiliar = false` or `familiar = true`. An json object is to store a person's words familiarity. Words not in the object are by default `familiar`.
-```js demo.html #script
-const wordsFamiliarity = {};
+# how the lexicon helps reading foreign laguange
+- The lexicon contains words with familiarity.
+```ts
+interface Lexicon {
+    [word: string]: Familiarity;
+}
+enum Familiarity {
+    unknown = 0;
+    learning = 1;
+    known = 2;
+}
 ```
-
-# which words should show hint
-Show hint for `unfamiliar` words.
-```js demo.html #script
-function shouldShowHint(wordsFamiliarity, word) {
-  return wordsFamilarity[words] === false;
+- The lexicon can suggest which words in the given text should be translated in order to approximate the goal where the reader:
+        - doesn't have to look up unknown words which interrupts reading
+        - is not bothered by translation of known words
+```ts
+function shouldTranslateWord(word: string, lexicon: Lexicon): boolean {
+    return lexicon[words] < Familiarity.known;
+}
+```
+- The lexicon gets updated given which words the reader looks up and which words the reader doesn't. Words been looked up should be unknown while words not been looked up should get increased familiarity. Note that for words not in the lexicon, those been looked up should be marked as unknown in the lexicon, those not been looked up should be marked as known in the lexicon.
+```ts
+function lookedUp(word: string, lexicon: Lexicon): void {
+    if (lexicon[word] === undefined) lexicon[word] = Familiarity.unknown;
+    else lexicon[word] = Familiarity.unknown;
+}
+function notLookedUp(word: string, lexicon: Lexicon): void {
+    if (lexicon[word] === undefined) lexicon[word] = Familiarity.known;
+    lexicon[word] = Math.min(lexicon[word] + 1, Familiarity.known);
 }
 ```
 
-# how to update words familiarity
-Mark words been looked up as `unfamiliar`. Mark other words as `familiar`.
-```js demo.html #script
-function lookedUp(wordsFamiliarity, word) {
-  wordsFamiliarity[word] = false;
-}
-function notLookedUp(wordsFamiliarity, word) {
-  wordsFamiliarity[word] = true;
-}
-```
 
 
 # how to display hint for unfamiliar words
@@ -41,7 +40,6 @@ Call me Ishmael. Some years ago—never mind how long precisely—having little 
 得到这样的优势">get such an upper hand of</span> me, that it requires a strong moral principle to prevent me from deliberately stepping into the street, and methodically knocking people’s hats off—then, I account it high time to get to sea as soon as I can. This is my substitute for <span hint="手枪">pistol</span> and ball. With a <span hint="哲学上">philosophical</span> <span hint="繁荣">flourish</span> Cato throws himself upon his sword; I quietly take to the ship. There is nothing surprising in this. If they but knew it, almost all men in their degree, some time or other, <span hint="珍爱">cherish</span> very nearly the same feelings towards the ocean with me.
 </p>
 ```
-
 ```html demo.html #style
 <style>
 [hint] {
@@ -75,11 +73,8 @@ function getSelectedText() {
     return document.selection.createRange().text;
   }
 }
-function doSomethingWithSelectedText() {
-
-}
+function doSomethingWithSelectedText() {}
 ```
-
 ``` demo.html #selectHook
 onmouseup="doSomethingWithSelectedText()"
 ```
